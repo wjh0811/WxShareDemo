@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes,initial-scale=1">
+		<meta name="参数" content="具体的描述">
+		<meta name="description" content="文科生，热爱前端与编程。目前大二，这是我的前端博客">
+		<meta name="author" content="Lxxyx,841380530@qq.com">
+		<title>宣传播放</title>
+		<link rel="stylesheet" type="text/css" href="/css/listvideo.css" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<script src="/js/jquery.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<script type="text/javascript">
+            var deviceWidth = document.documentElement.clientWidth;
+            document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+	</head>
+
+	<body>
+		<div class="play_content">
+			<div class="play_sp">
+				<video class="play_box" id="shakeVideo" controls="controls" x5-video-player-type="h5" preload="metadata" playsinline="true" webkit-playsinline="true" x-webkit-airplay="true" x5-video-orientation="portraint" x5-video-player-fullscreen="true">
+					<source src="/img/11111.MP4" type="video/mp4"></source>
+				</video>
+			</div>
+			<div class="play_name">
+				<p>短信诈骗之中行E令升级</p>
+				<div class="play_text">
+					<div id="video_one"><p  class="play_explain">短信防诈骗</p></div>
+					<p class="play_time">2019-03-08</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		    
+			var deviceWidth = document.documentElement.clientWidth
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+		</script>
+		<!--<script type="text/javascript">
+			window.onload = function() {
+                document.addEventListener(
+                    'WeixinJSBridgeReady',
+                    function() {
+                        var video = document.getElementById("shakeVideo");
+                        video.play();
+                    },
+                    false
+                );
+
+                $.ajax({
+                    url: '/access/share?url='+encodeURIComponent(window.location.href.split('#')[0]),
+                    type: 'POST',
+                    dataType: 'json'
+                }).done(function(res) {
+
+                    wx.config({
+                        debug: true,
+                        appId: res.appId,//APPID
+                        timestamp: res.timestamp,//上面main方法中拿到的时间戳timestamp
+                        nonceStr: res.nonceStr,//上面main方法中拿到的随机数nonceStr
+                        signature: res.signature,//上面main方法中拿到的签名signature
+                        //需要调用的方法接口
+                        jsApiList: [ 'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareWeibo','onMenuShareQQ','onMenuShareQZone']
+                    });
+                });
+                wx.ready(function(){
+
+
+                    //分享到朋友圈
+                    wx.onMenuShareTimeline({
+                        title: document.getElementById("video_one").innerText, // 分享标题
+                        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: "http://www.imooc.com/static/img/index/logo_new.png", // 分享图标
+                        type: 'video', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            document.title ="onMenuShareTimeline";
+                            // 用户点击了分享后执行的回调函数
+                        },
+						fail:function () {
+                            alert("分享到朋友圈失败");
+                        }
+                    });
+
+                    //分享给微信朋友
+                    wx.onMenuShareAppMessage({
+                        title: document.getElementById("video_one").innerText, // 分享标题
+                        desc: "分享描述分享描述分享描述分享描述分享描述分享描述分享描述分享描述", // 分享描述
+                        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: "http://www.imooc.com/static/img/index/logo_new.png", // 分享图标
+                        type: 'video', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            document.title ="onMenuShareAppMessage";
+                            // 用户点击了分享后执行的回调函数
+                        },
+                        fail:function () {
+                            alert("分享给朋友失败");
+                        }
+                    });
+                    //分享到qq
+                    wx.onMenuShareQQ({
+                        title: document.getElementById("video_one").innerText, // 分享标题
+                        desc:  "分享描述分享描述分享描述分享描述分享描述分享描述分享描述分享描述", // 分享描述
+                        link: window.location.href, // 分享链接
+                        imgUrl: "http://www.imooc.com/static/img/index/logo_new.png", // 分享图标
+                        success: function () {
+                            document.title ="onMenuShareQQ";
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            alert("失败")
+                            // 用户取消分享后执行的回调函数
+                            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                        },
+                        fail:function () {
+                            alert("分享到qq失败");
+                        }
+                    });
+                });
+                wx.error(function(res){
+                    alert(res+"失败");
+                });
+
+			}
+
+			function getvl(name) {
+				var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");
+				if(reg.test(location.href))
+					return unescape(RegExp.$2.replace(/\+/g, " "));
+				return "";
+			};
+		</script>-->
+
+	</body>
+
+</html>
